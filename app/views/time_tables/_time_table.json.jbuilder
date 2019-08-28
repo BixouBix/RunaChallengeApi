@@ -1,0 +1,1 @@
+json.(time_table, :id, :user_id, :status, :checkin, :checkout, :seconds)

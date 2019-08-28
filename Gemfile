@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.9', '>= 2.9.1'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -46,7 +46,13 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'faker', '~> 2.1', '>= 2.1.2'
-  gem 'factory_bot', '~> 5.0', '>= 5.0.2'
+  gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
+  gem 'rspec_api_documentation', '~> 6.1'
+  gem 'apitome', '~> 0.3.0'
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.1.2'
 end
 
 group :development do
