@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: %i[index create show update destroy]
   devise_for :users
   resources :time_tables, only: %i[index show update destroy] do
     get 'by_user/:user_id', on: :collection, to: 'time_tables#by_user'

@@ -1,343 +1,417 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><title>RunaChallengeApi</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#337ab7}.action h4.action-heading .method.head{color:#fff;background-color:#337ab7}.action h4.action-heading .method.options{color:#fff;background-color:#337ab7}.action h4.action-heading .method.put{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.post{color:#fff;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#fff;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#timetables">TimeTables</a></div><div class="collapse-content"><ul><li><a href="#timetables-timetables">TimeTables</a><ul><li><a href="#timetables-timetables-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all time tables (as user)</a></li><li><a href="#timetables-timetables-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all time tables (as admin)</a></li><li><a href="#timetables-timetables-get-2"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get time table (as user)</a></li><li><a href="#timetables-timetables-get-3"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get time table (as admin)</a></li><li><a href="#timetables-timetables-get-4"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Request user time tables</a></li><li><a href="#timetables-timetables-post"><span class="badge post"><i class="fa fa-plus"></i></span>User checks out</a></li><li><a href="#timetables-timetables-post-1"><span class="badge post"><i class="fa fa-plus"></i></span>User checks in</a></li><li><a href="#timetables-timetables-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Update time table (as admin)</a></li><li><a href="#timetables-timetables-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Delete time table (as admin)</a></li></ul></li></ul></div></div></nav><div class="content"><header><h1 id="top">RunaChallengeApi</h1></header><section id="timetables" class="resource-group"><h2 class="group-heading">TimeTables <a href="#timetables" class="permalink">&para;</a></h2><div id="timetables-timetables" class="resource"><h3 class="resource-heading">TimeTables <a href="#timetables-timetables" class="permalink">&nbsp;&para;</a></h3><h3 id="header-resource-timetable">Resource TimeTable <a class="permalink" href="#header-resource-timetable" aria-hidden="true">¶</a></h3>
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>RunaChallengeApi</title><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"><style>@import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200');.hljs-comment,.hljs-title{color:#8e908c}.hljs-variable,.hljs-attribute,.hljs-tag,.hljs-regexp,.ruby .hljs-constant,.xml .hljs-tag .hljs-title,.xml .hljs-pi,.xml .hljs-doctype,.html .hljs-doctype,.css .hljs-id,.css .hljs-class,.css .hljs-pseudo{color:#c82829}.hljs-number,.hljs-preprocessor,.hljs-pragma,.hljs-built_in,.hljs-literal,.hljs-params,.hljs-constant{color:#f5871f}.ruby .hljs-class .hljs-title,.css .hljs-rules .hljs-attribute{color:#eab700}.hljs-string,.hljs-value,.hljs-inheritance,.hljs-header,.ruby .hljs-symbol,.xml .hljs-cdata{color:#718c00}.css .hljs-hexcolor{color:#3e999f}.hljs-function,.python .hljs-decorator,.python .hljs-title,.ruby .hljs-function .hljs-title,.ruby .hljs-title .hljs-keyword,.perl .hljs-sub,.javascript .hljs-title,.coffeescript .hljs-title{color:#4271ae}.hljs-keyword,.javascript .hljs-function{color:#8959a8}.hljs{display:block;background:white;color:#4d4d4c;padding:.5em}.coffeescript .javascript,.javascript .xml,.tex .hljs-formula,.xml .javascript,.xml .vbscript,.xml .css,.xml .hljs-cdata{opacity:.5}.right .hljs-comment{color:#969896}.right .css .hljs-class,.right .css .hljs-id,.right .css .hljs-pseudo,.right .hljs-attribute,.right .hljs-regexp,.right .hljs-tag,.right .hljs-variable,.right .html .hljs-doctype,.right .ruby .hljs-constant,.right .xml .hljs-doctype,.right .xml .hljs-pi,.right .xml .hljs-tag .hljs-title{color:#c66}.right .hljs-built_in,.right .hljs-constant,.right .hljs-literal,.right .hljs-number,.right .hljs-params,.right .hljs-pragma,.right .hljs-preprocessor{color:#de935f}.right .css .hljs-rule .hljs-attribute,.right .ruby .hljs-class .hljs-title{color:#f0c674}.right .hljs-header,.right .hljs-inheritance,.right .hljs-name,.right .hljs-string,.right .hljs-value,.right .ruby .hljs-symbol,.right .xml .hljs-cdata{color:#b5bd68}.right .css .hljs-hexcolor,.right .hljs-title{color:#8abeb7}.right .coffeescript .hljs-title,.right .hljs-function,.right .javascript .hljs-title,.right .perl .hljs-sub,.right .python .hljs-decorator,.right .python .hljs-title,.right .ruby .hljs-function .hljs-title,.right .ruby .hljs-title .hljs-keyword{color:#81a2be}.right .hljs-keyword,.right .javascript .hljs-function{color:#b294bb}.right .hljs{display:block;overflow-x:auto;background:#1d1f21;color:#c5c8c6;padding:.5em;-webkit-text-size-adjust:none}.right .coffeescript .javascript,.right .javascript .xml,.right .tex .hljs-formula,.right .xml .css,.right .xml .hljs-cdata,.right .xml .javascript,.right .xml .vbscript{opacity:.5}body{color:black;background:white;font:400 14px / 1.42 'Roboto',Helvetica,sans-serif}header{border-bottom:1px solid #f2f2f2;margin-bottom:12px}h1,h2,h3,h4,h5{color:black;margin:12px 0}h1 .permalink,h2 .permalink,h3 .permalink,h4 .permalink,h5 .permalink{margin-left:0;opacity:0;transition:opacity .25s ease}h1:hover .permalink,h2:hover .permalink,h3:hover .permalink,h4:hover .permalink,h5:hover .permalink{opacity:1}.triple h1 .permalink,.triple h2 .permalink,.triple h3 .permalink,.triple h4 .permalink,.triple h5 .permalink{opacity:.15}.triple h1:hover .permalink,.triple h2:hover .permalink,.triple h3:hover .permalink,.triple h4:hover .permalink,.triple h5:hover .permalink{opacity:.15}h1{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:36px}h2{font:200 36px 'Raleway',Helvetica,sans-serif;font-size:30px}h3{font-size:100%;text-transform:uppercase}h5{font-size:100%;font-weight:normal}p{margin:0 0 10px}p.choices{line-height:1.6}a{color:#428bca;text-decoration:none}li p{margin:0}hr.split{border:0;height:1px;width:100%;padding-left:6px;margin:12px auto;background-image:linear-gradient(to right, rgba(0,0,0,0) 20%, rgba(0,0,0,0.2) 51.4%, rgba(255,255,255,0.2) 51.4%, rgba(255,255,255,0) 80%)}dl dt{float:left;width:130px;clear:left;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700}dl dd{margin-left:150px}blockquote{color:rgba(0,0,0,0.5);font-size:15.5px;padding:10px 20px;margin:12px 0;border-left:5px solid #e8e8e8}blockquote p:last-child{margin-bottom:0}pre{background-color:#f5f5f5;padding:12px;border:1px solid #cfcfcf;border-radius:6px;overflow:auto}pre code{color:black;background-color:transparent;padding:0;border:none}code{color:#444;background-color:#f5f5f5;font:'Inconsolata',monospace;padding:1px 4px;border:1px solid #cfcfcf;border-radius:3px}ul,ol{padding-left:2em}table{border-collapse:collapse;border-spacing:0;margin-bottom:12px}table tr:nth-child(2n){background-color:#fafafa}table th,table td{padding:6px 12px;border:1px solid #e6e6e6}.text-muted{opacity:.5}.note,.warning{padding:.3em 1em;margin:1em 0;border-radius:2px;font-size:90%}.note h1,.warning h1,.note h2,.warning h2,.note h3,.warning h3,.note h4,.warning h4,.note h5,.warning h5,.note h6,.warning h6{font-family:200 36px 'Raleway',Helvetica,sans-serif;font-size:135%;font-weight:500}.note p,.warning p{margin:.5em 0}.note{color:black;background-color:#f0f6fb;border-left:4px solid #428bca}.note h1,.note h2,.note h3,.note h4,.note h5,.note h6{color:#428bca}.warning{color:black;background-color:#fbf1f0;border-left:4px solid #c9302c}.warning h1,.warning h2,.warning h3,.warning h4,.warning h5,.warning h6{color:#c9302c}header{margin-top:24px}nav{position:fixed;top:24px;bottom:0;overflow-y:auto}nav .resource-group{padding:0}nav .resource-group .heading{position:relative}nav .resource-group .heading .chevron{position:absolute;top:12px;right:12px;opacity:.5}nav .resource-group .heading a{display:block;color:black;opacity:.7;border-left:2px solid transparent;margin:0}nav .resource-group .heading a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul{list-style-type:none;padding-left:0}nav ul a{display:block;font-size:13px;color:rgba(0,0,0,0.7);padding:8px 12px;border-top:1px solid #d9d9d9;border-left:2px solid transparent;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}nav ul a:hover{text-decoration:none;background-color:bad-color;border-left:2px solid black}nav ul>li{margin:0}nav ul>li:first-child{margin-top:-12px}nav ul>li:last-child{margin-bottom:-12px}nav ul ul a{padding-left:24px}nav ul ul li{margin:0}nav ul ul li:first-child{margin-top:0}nav ul ul li:last-child{margin-bottom:0}nav>div>div>ul>li:first-child>a{border-top:none}.preload *{transition:none !important}.pull-left{float:left}.pull-right{float:right}.badge{display:inline-block;float:right;min-width:10px;min-height:14px;padding:3px 7px;font-size:12px;color:#000;background-color:#f2f2f2;border-radius:10px;margin:-2px 0}.badge.get{color:#70bbe1;background-color:#d9edf7}.badge.head{color:#70bbe1;background-color:#d9edf7}.badge.options{color:#70bbe1;background-color:#d9edf7}.badge.put{color:#f0db70;background-color:#fcf8e3}.badge.patch{color:#f0db70;background-color:#fcf8e3}.badge.post{color:#93cd7c;background-color:#dff0d8}.badge.delete{color:#ce8383;background-color:#f2dede}.collapse-button{float:right}.collapse-button .close{display:none;color:#428bca;cursor:pointer}.collapse-button .open{color:#428bca;cursor:pointer}.collapse-button.show .close{display:inline}.collapse-button.show .open{display:none}.collapse-content{max-height:0;overflow:hidden;transition:max-height .3s ease-in-out}nav{width:220px}.container{max-width:940px;margin-left:auto;margin-right:auto}.container .row .content{margin-left:244px;width:696px}.container .row:after{content:'';display:block;clear:both}.container-fluid nav{width:22%}.container-fluid .row .content{margin-left:24%}.container-fluid.triple nav{width:16.5%;padding-right:1px}.container-fluid.triple .row .content{position:relative;margin-left:16.5%;padding-left:24px}.middle:before,.middle:after{content:'';display:table}.middle:after{clear:both}.middle{box-sizing:border-box;width:51.5%;padding-right:12px}.right{box-sizing:border-box;float:right;width:48.5%;padding-left:12px}.right a{color:#428bca}.right h1,.right h2,.right h3,.right h4,.right h5,.right p,.right div{color:white}.right pre{background-color:#1d1f21;border:1px solid #1d1f21}.right pre code{color:#c5c8c6}.right .description{margin-top:12px}.triple .resource-heading{font-size:125%}.definition{margin-top:12px;margin-bottom:12px}.definition .method{font-weight:bold}.definition .method.get{color:#2e8ab8}.definition .method.head{color:#2e8ab8}.definition .method.options{color:#2e8ab8}.definition .method.post{color:#56b82e}.definition .method.put{color:#b8a22e}.definition .method.patch{color:#b8a22e}.definition .method.delete{color:#b82e2e}.definition .uri{word-break:break-all;word-wrap:break-word}.definition .hostname{opacity:.5}.example-names{background-color:#eee;padding:12px;border-radius:6px}.example-names .tab-button{cursor:pointer;color:black;border:1px solid #ddd;padding:6px;margin-left:12px}.example-names .tab-button.active{background-color:#d5d5d5}.right .example-names{background-color:#444}.right .example-names .tab-button{color:white;border:1px solid #666;border-radius:6px}.right .example-names .tab-button.active{background-color:#5e5e5e}#nav-background{position:fixed;left:0;top:0;bottom:0;width:16.5%;padding-right:14.4px;background-color:#fbfbfb;border-right:1px solid #f0f0f0;z-index:-1}#right-panel-background{position:absolute;right:-12px;top:-12px;bottom:-12px;width:48.6%;background-color:#333;z-index:-1}@media (max-width:1200px){nav{width:198px}.container{max-width:840px}.container .row .content{margin-left:224px;width:606px}}@media (max-width:992px){nav{width:169.4px}.container{max-width:720px}.container .row .content{margin-left:194px;width:526px}}@media (max-width:768px){nav{display:none}.container{width:95%;max-width:none}.container .row .content,.container-fluid .row .content,.container-fluid.triple .row .content{margin-left:auto;margin-right:auto;width:95%}#nav-background{display:none}#right-panel-background{width:48.6%}}.back-to-top{position:fixed;z-index:1;bottom:0;right:24px;padding:4px 8px;color:rgba(0,0,0,0.5);background-color:#f2f2f2;text-decoration:none !important;border-top:1px solid #d9d9d9;border-left:1px solid #d9d9d9;border-right:1px solid #d9d9d9;border-top-left-radius:3px;border-top-right-radius:3px}.resource-group{padding:12px;margin-bottom:12px;background-color:white;border:1px solid #d9d9d9;border-radius:6px}.resource-group h2.group-heading,.resource-group .heading a{padding:12px;margin:-12px -12px 12px -12px;background-color:#f2f2f2;border-bottom:1px solid #d9d9d9;border-top-left-radius:6px;border-top-right-radius:6px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}.triple .content .resource-group{padding:0;border:none}.triple .content .resource-group h2.group-heading,.triple .content .resource-group .heading a{margin:0 0 12px 0;border:1px solid #d9d9d9}nav .resource-group .heading a{padding:12px;margin-bottom:0}nav .resource-group .collapse-content{padding:0}.action{margin-bottom:12px;padding:12px 12px 0 12px;overflow:hidden;border:1px solid transparent;border-radius:6px}.action h4.action-heading{padding:6px 12px;margin:-12px -12px 12px -12px;border-bottom:1px solid transparent;border-top-left-radius:6px;border-top-right-radius:6px;overflow:hidden}.action h4.action-heading .name{float:right;font-weight:normal;padding:6px 0}.action h4.action-heading .method{padding:6px 12px;margin-right:12px;border-radius:3px;display:inline-block}.action h4.action-heading .method.get{color:#fff;background-color:#337ab7}.action h4.action-heading .method.head{color:#fff;background-color:#337ab7}.action h4.action-heading .method.options{color:#fff;background-color:#337ab7}.action h4.action-heading .method.put{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.patch{color:#fff;background-color:#ed9c28}.action h4.action-heading .method.post{color:#fff;background-color:#5cb85c}.action h4.action-heading .method.delete{color:#fff;background-color:#d9534f}.action h4.action-heading code{color:#444;background-color:#f5f5f5;border-color:#cfcfcf;font-weight:normal;word-break:break-all;display:inline-block;margin-top:2px}.action dl.inner{padding-bottom:2px}.action .title{border-bottom:1px solid white;margin:0 -12px -1px -12px;padding:12px}.action.get{border-color:#bce8f1}.action.get h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.head{border-color:#bce8f1}.action.head h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.options{border-color:#bce8f1}.action.options h4.action-heading{color:#337ab7;background:#d9edf7;border-bottom-color:#bce8f1}.action.post{border-color:#d6e9c6}.action.post h4.action-heading{color:#5cb85c;background:#dff0d8;border-bottom-color:#d6e9c6}.action.put{border-color:#faebcc}.action.put h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.patch{border-color:#faebcc}.action.patch h4.action-heading{color:#ed9c28;background:#fcf8e3;border-bottom-color:#faebcc}.action.delete{border-color:#ebccd1}.action.delete h4.action-heading{color:#d9534f;background:#f2dede;border-bottom-color:#ebccd1}</style></head><body class="preload"><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#timetables">TimeTables</a></div><div class="collapse-content"><ul><li><a href="#timetables-timetables">TimeTables</a><ul><li><a href="#timetables-timetables-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all time tables (as user)</a></li><li><a href="#timetables-timetables-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all time tables (as admin)</a></li><li><a href="#timetables-timetables-get-2"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get time table (as user)</a></li><li><a href="#timetables-timetables-get-3"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get time table (as admin)</a></li><li><a href="#timetables-timetables-get-4"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Request user time tables</a></li><li><a href="#timetables-timetables-post"><span class="badge post"><i class="fa fa-plus"></i></span>User checks out</a></li><li><a href="#timetables-timetables-post-1"><span class="badge post"><i class="fa fa-plus"></i></span>User checks in</a></li><li><a href="#timetables-timetables-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Update time table (as admin)</a></li><li><a href="#timetables-timetables-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Delete time table (as admin)</a></li></ul></li></ul></div></div><div class="resource-group"><div class="heading"><div class="chevron"><i class="open fa fa-angle-down"></i></div><a href="#users">Users</a></div><div class="collapse-content"><ul><li><a href="#users-users">Users</a><ul><li><a href="#users-users-get"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get all users</a></li><li><a href="#users-users-get-1"><span class="badge get"><i class="fa fa-arrow-down"></i></span>Get a user</a></li><li><a href="#users-users-post"><span class="badge post"><i class="fa fa-plus"></i></span>Create a new user</a></li><li><a href="#users-users-put"><span class="badge put"><i class="fa fa-pencil"></i></span>Update a user</a></li><li><a href="#users-users-delete"><span class="badge delete"><i class="fa fa-times"></i></span>Delete a user</a></li></ul></li></ul></div></div></nav><div class="content"><header><h1 id="top">RunaChallengeApi</h1></header><section id="timetables" class="resource-group"><h2 class="group-heading">TimeTables <a href="#timetables" class="permalink">&para;</a></h2><div id="timetables-timetables" class="resource"><h3 class="resource-heading">TimeTables <a href="#timetables-timetables" class="permalink">&nbsp;&para;</a></h3><h3 id="header-resource-timetable">Resource TimeTable <a class="permalink" href="#header-resource-timetable" aria-hidden="true">¶</a></h3>
 <p>All endpoints for the TimeTable resource</p>
 <div id="timetables-timetables-get" class="action get"><h4 class="action-heading"><div class="name">Get all time tables (as user)</div><a href="#timetables-timetables-get" class="method get">GET</a><code class="uri">/time_tables</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns time tables for user</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables</code></p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">time_tables</span>": <span class="hljs-value">[
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70853</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48357</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-09T17:20:21.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-09T22:20:21.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70854</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-11T12:15:56.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-11T15:15:56.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70855</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-01T05:55:43.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-01T06:55:43.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">3600</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70856</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-06-15T16:18:11.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-06-15T23:18:11.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-04T16:36:10.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-04T23:36:10.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70857</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48358</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-13T00:42:11.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-13T10:42:11.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-10T17:48:45.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-10T21:48:45.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">14400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48359</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-10T20:57:03.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-11T06:57:03.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70858</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48360</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-02T12:08:15.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-02T19:08:15.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-16T05:33:47.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-16T13:33:47.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48361</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-29T14:02:43.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-29T18:02:43.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">14400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48362</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-02T19:22:49.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-02T23:22:49.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">14400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48363</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-17T08:00:28.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-17T13:00:28.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48364</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-26T15:35:14.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-26T22:35:14.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70859</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48365</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-08T11:47:35.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-08T18:47:35.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-02T05:33:09.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-02T13:33:09.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70860</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48366</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33287</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-01T18:41:45.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-02T00:41:45.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">21600</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70861</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-31T01:31:02.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-31T10:31:02.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70862</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28794</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-11T09:22:25.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-11T12:22:25.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-10T13:41:47.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-10T23:41:47.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
     </span>}
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-1" class="action get"><h4 class="action-heading"><div class="name">Get all time tables (as admin)</div><a href="#timetables-timetables-get-1" class="method get">GET</a><code class="uri">/time_tables</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns all time tables</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables</code></p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">time_tables</span>": <span class="hljs-value">[
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70878</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28802</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48382</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33297</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-31T07:25:45.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-31T09:25:45.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">7200</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70879</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28802</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-01T07:58:10.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-01T17:58:10.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70880</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28802</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-25T17:56:55.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-25T22:56:55.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70881</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28802</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-09T08:15:12.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-09T18:15:12.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70882</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28802</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-10T20:19:46.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-11T05:19:46.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70883</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-18T08:29:56.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-18T11:29:56.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70884</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-18T14:39:02.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-18T21:39:02.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-03T03:32:14.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-03T10:32:14.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70885</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48383</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33297</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-15T21:17:19.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-16T02:17:19.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70886</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-15T04:05:35.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-15T08:05:35.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-04T17:51:12.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-04T21:51:12.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">14400</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70887</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48384</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33297</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-22T22:21:39.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-23T05:21:39.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70888</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-04T19:57:43.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-05T00:57:43.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70889</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-08T03:42:50.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-08T08:42:50.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70890</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-24T20:00:16.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-25T01:00:16.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70891</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-03T19:42:17.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-04T03:42:17.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70892</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28807</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-12T13:01:19.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-12T22:01:19.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
-    </span>}
-  ]
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-2" class="action get"><h4 class="action-heading"><div class="name">Get time table (as user)</div><a href="#timetables-timetables-get-2" class="method get">GET</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">70921</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>70921</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns the time table</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables/70921</code></p>
-</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70921</span></span>,
-  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28820</span></span>,
-  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-07T23:16:14.000Z"</span></span>,
-  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-08T04:16:14.000Z"</span></span>,
-  "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-3" class="action get"><h4 class="action-heading"><div class="name">Get time table (as admin)</div><a href="#timetables-timetables-get-3" class="method get">GET</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">70973</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>70973</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns time table</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables/70973</code></p>
-</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">70973</span></span>,
-  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28850</span></span>,
-  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-26T01:56:42.000Z"</span></span>,
-  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-26T06:56:42.000Z"</span></span>,
-  "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-4" class="action get"><h4 class="action-heading"><div class="name">Request user time tables</div><a href="#timetables-timetables-get-4" class="method get">GET</a><code class="uri">/time_tables/by_user/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/by_user/<span class="hljs-attribute" title="user_id">28872</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>28872</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns user time tables</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables/by_user/28872</code></p>
-</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">time_tables</span>": <span class="hljs-value">[
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71008</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-15T13:29:41.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-15T23:29:41.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71009</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-03T03:40:52.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-03T09:40:52.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">21600</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71010</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-24T04:48:46.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-24T12:48:46.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71011</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-15T00:02:23.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-15T08:02:23.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71012</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-11T12:00:35.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-11T19:00:35.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71013</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-15T06:03:50.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-15T07:03:50.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">3600</span>
-    </span>},
-    {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71014</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
-      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-22T14:51:31.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-22T17:51:31.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-17T13:32:34.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-17T16:32:34.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71015</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48385</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33297</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-07T20:15:50.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-08T03:15:50.000Z"</span></span>,
-      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">25200</span>
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-21T12:57:04.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-21T17:57:04.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71016</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48386</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33297</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-05T09:00:04.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-05T10:00:04.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-09T08:45:30.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-09T13:45:30.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48387</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-01T01:54:46.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-01T06:54:46.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">18000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48388</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-30T02:59:55.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-30T05:59:55.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48389</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-25T12:55:54.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-25T22:55:54.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48390</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-09T02:48:46.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-03-09T03:48:46.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">3600</span>
     </span>},
     {
-      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71017</span></span>,
-      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28872</span></span>,
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48391</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
       "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-06T08:05:51.000Z"</span></span>,
-      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-06T16:05:51.000Z"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-13T22:59:56.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-14T04:59:56.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">21600</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48392</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-07T10:38:34.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-07T19:38:34.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48393</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-13T06:58:28.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-05-13T15:58:28.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48394</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-06-05T18:24:47.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-06-05T22:24:47.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">14400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48395</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-28T17:22:36.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-29T03:22:36.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48396</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33300</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-23T20:49:53.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-24T06:49:53.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-2" class="action get"><h4 class="action-heading"><div class="name">Get time table (as user)</div><a href="#timetables-timetables-get-2" class="method get">GET</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">48425</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>48425</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns the time table</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables/48425</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48425</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33313</span></span>,
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-06-03T21:28:00.000Z"</span></span>,
+  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-06-04T07:28:00.000Z"</span></span>,
+  "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-3" class="action get"><h4 class="action-heading"><div class="name">Get time table (as admin)</div><a href="#timetables-timetables-get-3" class="method get">GET</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">48478</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>48478</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns time table</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables/48478</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48478</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33339</span></span>,
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-03T11:26:51.000Z"</span></span>,
+  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-02-03T14:26:51.000Z"</span></span>,
+  "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-get-4" class="action get"><h4 class="action-heading"><div class="name">Request user time tables</div><a href="#timetables-timetables-get-4" class="method get">GET</a><code class="uri">/time_tables/by_user/{user_id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/by_user/<span class="hljs-attribute" title="user_id">33365</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>user_id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>33365</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns user time tables</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/time_tables/by_user/33365</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">time_tables</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48512</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-23T21:52:22.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-24T00:52:22.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48513</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-03T14:45:29.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-03T17:45:29.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48514</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-15T16:42:10.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-07-16T00:42:10.000Z"</span></span>,
       "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48515</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-23T01:47:33.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-01-23T10:47:33.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48516</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-07T10:27:26.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-04-07T20:27:26.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48517</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-07T18:33:46.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-10-08T02:33:46.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">28800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48518</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-05T11:59:35.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-12-05T14:59:35.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">10800</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48519</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-14T12:38:58.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-14T21:38:58.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">32400</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48520</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-04T01:51:29.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-11-04T11:51:29.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">36000</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48521</span></span>,
+      "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33365</span></span>,
+      "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
+      "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-28T23:34:35.000Z"</span></span>,
+      "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2018-09-29T03:34:35.000Z"</span></span>,
+      "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">14400</span>
     </span>}
   ]
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-post" class="action post"><h4 class="action-heading"><div class="name">User checks out</div><a href="#timetables-timetables-post" class="method post">POST</a><code class="uri">/time_tables</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns time table with seconds elapsed</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/time_tables</code></p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71021</span></span>,
-  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28890</span></span>,
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48525</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33383</span></span>,
   "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T19:48:21.470Z"</span></span>,
-  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T20:48:21.473Z"</span></span>,
+  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T21:44:08.258Z"</span></span>,
+  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T22:44:08.261Z"</span></span>,
   "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">3600</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-post-1" class="action post"><h4 class="action-heading"><div class="name">User checks in</div><a href="#timetables-timetables-post-1" class="method post">POST</a><code class="uri">/time_tables</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>creates an open time table</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/time_tables</code></p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71023</span></span>,
-  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28892</span></span>,
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48527</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33385</span></span>,
   "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"open"</span></span>,
-  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T20:48:21.491Z"</span></span>,
+  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T22:44:08.276Z"</span></span>,
   "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-  "<span class="hljs-attribute">seconds</span>": <span class="hljs-value">-<span class="hljs-number">1567111701</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-put" class="action put"><h4 class="action-heading"><div class="name">Update time table (as admin)</div><a href="#timetables-timetables-put" class="method put">PUT</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">71074</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>71074</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>updates check times</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>PUT</strong>  <code>/time_tables/71074</code></p>
+  "<span class="hljs-attribute">seconds</span>": <span class="hljs-value">-<span class="hljs-number">1567118648</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-put" class="action put"><h4 class="action-heading"><div class="name">Update time table (as admin)</div><a href="#timetables-timetables-put" class="method put">PUT</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">48582</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>48582</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>updates check tim</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><pre><code><span class="hljs-title">endes</span></code></pre>
+<p><strong>PUT</strong>  <code>/time_tables/48582</code></p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T14:48:21.585-05:00"</span></span>,
-  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T15:48:21.585-05:00"</span>
+  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T16:44:08.371-05:00"</span></span>,
+  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T17:44:08.371-05:00"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
-  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">71074</span></span>,
-  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">28900</span></span>,
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">48582</span></span>,
+  "<span class="hljs-attribute">user_id</span>": <span class="hljs-value"><span class="hljs-number">33393</span></span>,
   "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"closed"</span></span>,
-  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T19:48:21.585Z"</span></span>,
-  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T20:48:21.585Z"</span></span>,
+  "<span class="hljs-attribute">checkin</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T21:44:08.371Z"</span></span>,
+  "<span class="hljs-attribute">checkout</span>": <span class="hljs-value"><span class="hljs-string">"2019-08-29T22:44:08.371Z"</span></span>,
   "<span class="hljs-attribute">seconds</span>": <span class="hljs-value"><span class="hljs-number">3600</span>
-</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete time table (as admin)</div><a href="#timetables-timetables-delete" class="method delete">DELETE</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">71177</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>71177</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>renders success message</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>DELETE</strong>  <code>/time_tables/71177</code></p>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="timetables-timetables-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete time table (as admin)</div><a href="#timetables-timetables-delete" class="method delete">DELETE</a><code class="uri">/time_tables/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/time_tables/<span class="hljs-attribute" title="id">48680</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>48680</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>renders success message</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>DELETE</strong>  <code>/time_tables/48680</code></p>
 </div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
   "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"Time table was deleted successfully"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section><section id="users" class="resource-group"><h2 class="group-heading">Users <a href="#users" class="permalink">&para;</a></h2><div id="users-users" class="resource"><h3 class="resource-heading">Users <a href="#users-users" class="permalink">&nbsp;&para;</a></h3><h3 id="header-resource-user">Resource User <a class="permalink" href="#header-resource-user" aria-hidden="true">¶</a></h3>
+<p>All endpoints for the User resource (admin only)</p>
+<div id="users-users-get" class="action get"><h4 class="action-heading"><div class="name">Get all users</div><a href="#users-users-get" class="method get">GET</a><code class="uri">/users</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/users</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns all users</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/users</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">users</span>": <span class="hljs-value">[
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33430</span></span>,
+      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Juli"</span></span>,
+      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Klocko"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"lonny@cummerata.com"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33431</span></span>,
+      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Dennise"</span></span>,
+      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Prohaska"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"luther.pfannerstill@flatleylangosh.org"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33432</span></span>,
+      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Leslie"</span></span>,
+      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Brakus"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"toney@berge.info"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33433</span></span>,
+      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Erna"</span></span>,
+      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Schmeler"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"ciera@torphybergstrom.biz"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33434</span></span>,
+      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Kurtis"</span></span>,
+      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Marvin"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"dustin@dickens.info"</span>
+    </span>},
+    {
+      "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33435</span></span>,
+      "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Cesar"</span></span>,
+      "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Halvorson"</span></span>,
+      "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"elenore_bruen@bernier.biz"</span>
+    </span>}
+  ]
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="users-users-get-1" class="action get"><h4 class="action-heading"><div class="name">Get a user</div><a href="#users-users-get-1" class="method get">GET</a><code class="uri">/users/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method get">GET</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="id">33465</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>33465</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>returns user</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>GET</strong>  <code>/users/33465</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33465</span></span>,
+  "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"Demarcus"</span></span>,
+  "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"Little"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"jonah@botsford.name"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="users-users-post" class="action post"><h4 class="action-heading"><div class="name">Create a new user</div><a href="#users-users-post" class="method post">POST</a><code class="uri">/users</code></h4><h4>Example URI</h4><div class="definition"><span class="method post">POST</span>&nbsp;<span class="uri"><span class="hostname"></span>/users</span></div><div class="title"><strong>Request&nbsp;&nbsp;<code>creates a new user</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>POST</strong>  <code>/users</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"FirstName"</span></span>,
+  "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"LastName"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"example@example.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"SomePassword"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33483</span></span>,
+  "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"FirstName"</span></span>,
+  "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"LastName"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"example@example.com"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="users-users-put" class="action put"><h4 class="action-heading"><div class="name">Update a user</div><a href="#users-users-put" class="method put">PUT</a><code class="uri">/users/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method put">PUT</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="id">33515</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>33515</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>updates user</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>PUT</strong>  <code>/users/33515</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"FirstName"</span></span>,
+  "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"LastName"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"example@example.com"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"SomePassword"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">id</span>": <span class="hljs-value"><span class="hljs-number">33515</span></span>,
+  "<span class="hljs-attribute">first_name</span>": <span class="hljs-value"><span class="hljs-string">"FirstName"</span></span>,
+  "<span class="hljs-attribute">last_name</span>": <span class="hljs-value"><span class="hljs-string">"LastName"</span></span>,
+  "<span class="hljs-attribute">email</span>": <span class="hljs-value"><span class="hljs-string">"example@example.com"</span>
+</span>}</code></pre><div style="height: 1px;"></div></div></div></div><div id="users-users-delete" class="action delete"><h4 class="action-heading"><div class="name">Delete a user</div><a href="#users-users-delete" class="method delete">DELETE</a><code class="uri">/users/{id}</code></h4><h4>Example URI</h4><div class="definition"><span class="method delete">DELETE</span>&nbsp;<span class="uri"><span class="hostname"></span>/users/<span class="hljs-attribute" title="id">33549</span></span></div><div class="title"><strong>URI Parameters</strong><div class="collapse-button show"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><dl class="inner"><dt>id</dt><dd><code>number</code>&nbsp;<span class="required">(required)</span>&nbsp;<span class="text-muted example"><strong>Example:&nbsp;</strong><span>33549</span></span></dd></dl></div><div class="title"><strong>Request&nbsp;&nbsp;<code>renders success message</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><div class="description"><p><strong>DELETE</strong>  <code>/users/33549</code></p>
+</div><h5>Headers</h5><pre><code><span class="hljs-attribute">Accept</span>: <span class="hljs-string">application/json</span><br><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span></code></pre><div style="height: 1px;"></div></div></div><div class="title"><strong>Response&nbsp;&nbsp;<code>200</code></strong><div class="collapse-button"><span class="close">Hide</span><span class="open">Show</span></div></div><div class="collapse-content"><div class="inner"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json; charset=utf-8</span></code></pre><div style="height: 1px;"></div><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">message</span>": <span class="hljs-value"><span class="hljs-string">"User was deleted successfully"</span>
 </span>}</code></pre><div style="height: 1px;"></div></div></div></div></div></section></div></div></div><p style="text-align: center;" class="text-muted">Generated by&nbsp;<a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a>&nbsp;on 29 Aug 2019</p><script>/* eslint-env browser */
 /* eslint quotes: [2, "single"] */
 'use strict';
