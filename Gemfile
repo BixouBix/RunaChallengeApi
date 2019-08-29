@@ -47,12 +47,11 @@ group :development, :test do
   gem 'guard-rspec', '~> 4.7', '>= 4.7.3'
   gem 'faker', '~> 2.1', '>= 2.1.2'
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
-  gem 'rspec_api_documentation', '~> 6.1'
-  gem 'apitome', '~> 0.3.0'
 end
 
 group :test do
   gem 'shoulda-matchers', '~> 3.1.2'
+  gem 'dox', '~> 1.1', require: false
 end
 
 group :development do
