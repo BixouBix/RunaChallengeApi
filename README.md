@@ -38,4 +38,4 @@ $ foreman start
 ```
 
 ## Documentation
-* [Documentation]()
+* For full documentation launch `public/api/docs/index.html` on any browser
