@@ -12,9 +12,7 @@ RSpec.describe TimeTablesController, type: :request do
   let(:user_time_table) { user_time_tables.sample }
   
 
-  describe 'GET #index', :dox do
-    include Docs::TimeTables::Index
-
+  describe 'GET /time_tables' do
     context 'user is not signed in' do
       before { get "/time_tables", as: :json }
       
@@ -28,6 +26,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
     
     context 'user is signed in' do
+      include Docs::TimeTables::IndexUser
       before do
         user_time_tables
         sign_in test_user
@@ -38,12 +37,13 @@ RSpec.describe TimeTablesController, type: :request do
         is_successfull
       end
       
-      it 'returns time tables for user' do
+      it 'returns time tables for user', :dox do
         expect(json['time_tables'].count).to eq(user_time_tables.count)
       end
     end
     
     context 'admin is signed in' do
+      include Docs::TimeTables::IndexAdmin
       before do
         time_tables
         user_time_tables
@@ -55,14 +55,13 @@ RSpec.describe TimeTablesController, type: :request do
         is_successfull
       end
       
-      it 'returns all time tables' do
+      it 'returns all time tables', :dox do
         expect(json['time_tables'].count).to eq(time_tables.count + user_time_tables.count)
       end
     end
   end
   
-  describe 'GET #show', :dox do
-    include Docs::TimeTables::Show
+  describe 'GET /time_tables/:id' do
     context 'user is not signed in' do
       before do
         get "/time_tables/#{time_tables.sample.id}", as: :json
@@ -84,6 +83,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the time table belongs to the user' do
+        include Docs::TimeTables::ShowUser
         before do
           get "/time_tables/#{user_time_table.id}", as: :json
         end
@@ -92,7 +92,7 @@ RSpec.describe TimeTablesController, type: :request do
           is_successfull
         end
 
-        it 'returns the time table' do
+        it 'returns the time table', :dox do
          expect(json['id']).to eq(user_time_table.id)
         end
       end
@@ -117,6 +117,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
 
     context 'admin is signed in' do
+      include Docs::TimeTables::ShowAdmin
       before do
         sign_in admin
       end
@@ -130,7 +131,7 @@ RSpec.describe TimeTablesController, type: :request do
           is_successfull
         end
 
-        it 'returns time table' do
+        it 'returns time table', :dox do
           expect(json['id']).to eq(time_table.id)
         end
       end
@@ -151,7 +152,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
   end
   
-  describe 'GET #by_user', :dox do
+  describe 'GET /time_tables/by_user/:user_id' do
     include Docs::TimeTables::ByUser
     context 'user is not signed in' do
       before do
@@ -217,7 +218,7 @@ RSpec.describe TimeTablesController, type: :request do
           is_successfull
         end
 
-        it 'returns user time tables' do
+        it 'returns user time tables', :dox do
           expect(json['time_tables'].count).to eq(user_time_tables.count)
         end
       end
@@ -252,8 +253,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
   end
   
-  describe 'POST #register', :dox do
-    include Docs::TimeTables::Register
+  describe 'POST /time_tables' do
     context 'user is not signed in' do
       before do
         post '/time_tables', as: :json
@@ -274,6 +274,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the user has an open time table' do
+        include Docs::TimeTables::Checkout
         let(:test_table) { create(:time_table, checkin: DateTime.now - 1.hour, user: test_user, checkout: nil, status: 0, seconds: nil) }
         before do
           test_table
@@ -292,12 +293,13 @@ RSpec.describe TimeTablesController, type: :request do
           expect(json['status']).to eq('closed')
         end
 
-        it 'returns time table with seconds elapsed' do
-          expect(json['seconds']).to eq(3600)
+        it 'returns time table with seconds elapsed', :dox do
+          expect(json['seconds']).to be_between(3598, 3602)
         end
       end
 
       context 'the user does not have an open time table' do
+        include Docs::TimeTables::Checkin
         before do
           post '/time_tables', as: :json
         end
@@ -306,7 +308,7 @@ RSpec.describe TimeTablesController, type: :request do
           is_successfull
         end
 
-        it 'creates an open time table' do
+        it 'creates an open time table', :dox do
           expect(json['checkin']).not_to be(nil)
           expect(json['checkout']).to be(nil)
           expect(json['time']).to be(nil)
@@ -315,8 +317,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
   end
   
-  describe 'PUT/PATCH #update', :dox do
-    include Docs::TimeTables::Update
+  describe 'PUT/PATCH /time_tables/:id' do
     context 'user is not signed in' do
       before do
         put "/time_tables/#{user_time_table.id}", params: { checkin: DateTime.now }, as: :json
@@ -355,6 +356,7 @@ RSpec.describe TimeTablesController, type: :request do
 
       context 'time table exists' do
         context 'checkin and checkout are updated' do
+          include Docs::TimeTables::Update
           before do
             put "/time_tables/#{user_time_table.id}", params: { checkin: @checkin, checkout: @checkout }, as: :json
           end
@@ -363,7 +365,7 @@ RSpec.describe TimeTablesController, type: :request do
             is_successfull
           end
 
-          it 'updates check times' do
+          it 'updates check times', :dox do
             expect(DateTime.parse(json['checkin']).to_i).to eq(@checkin.to_i)
             expect(DateTime.parse(json['checkout']).to_i).to eq(@checkout.to_i)
           end
@@ -409,8 +411,8 @@ RSpec.describe TimeTablesController, type: :request do
     end
   end
   
-  describe 'DELETE #destroy', :dox do
-    include Docs::TimeTables::Destroy
+  describe 'DELETE #destroy' do
+    include Docs::TimeTables::Delete
     context 'user is not signed in' do
       before do
         delete "/time_tables/#{user_time_table.id}", as: :json
@@ -454,7 +456,7 @@ RSpec.describe TimeTablesController, type: :request do
           is_successfull
         end
 
-        it 'renders success message' do
+        it 'renders success message', :dox do
           expect(json['message']).to match(/Time table was deleted successfully/)
         end
       end

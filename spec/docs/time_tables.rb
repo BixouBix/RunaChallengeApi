@@ -9,28 +9,40 @@ module Docs
       end
     end
     
-    document :index do
-      action 'Retrieves time tables collection'
+    document :index_user do
+      action 'Get all time tables (as user)'
     end
     
-    document :show do
-      action 'Retrieves specific time table'
+    document :index_admin do
+      action 'Get all time tables (as admin)'
+    end
+    
+    document :show_user do
+      action 'Get time table (as user)'
+    end
+    
+    document :show_admin do
+      action 'Get time table (as admin)'
     end
     
     document :by_user do
-      action 'Retrieves a collection of time tables belonging to a specific user'
+      action 'Request user time tables'
+    end
+
+    document :checkin do
+      action 'User checks in'
     end
     
-    document :register do
-      action 'Registers a user chekin/checkout'
+    document :checkout do
+      action 'User checks out'
     end
     
     document :update do
-      action 'Updates a time table (admin only)'
+      action 'Update time table (as admin)'
     end
     
-    document :destroy do
-      action 'Deletes a time table (admin only)'
+    document :delete do
+      action 'Delete time table (as admin)'
     end
   end
 end
