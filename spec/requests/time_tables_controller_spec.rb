@@ -63,9 +63,8 @@ RSpec.describe TimeTablesController, type: :request do
   
   describe 'GET /time_tables/:id' do
     context 'user is not signed in' do
-      before do
-        get "/time_tables/#{time_tables.sample.id}", as: :json
-      end
+      before { get "/time_tables/#{time_tables.sample.id}", as: :json }
+      
 
       it 'returns status 401' do
         expect(status).to eq(401)
@@ -84,9 +83,7 @@ RSpec.describe TimeTablesController, type: :request do
 
       context 'the time table belongs to the user' do
         include Docs::TimeTables::ShowUser
-        before do
-          get "/time_tables/#{user_time_table.id}", as: :json
-        end
+        before { get "/time_tables/#{user_time_table.id}", as: :json }
 
         it 'returns status 200' do
           is_successfull
@@ -98,9 +95,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the time table does not belong to the user' do
-        before do
-          get "/time_tables/#{time_table.id}", as: :json
-        end
+        before { get "/time_tables/#{time_table.id}", as: :json }
 
         it 'returns status 403' do
           expect(status).to eq(403)
@@ -118,14 +113,10 @@ RSpec.describe TimeTablesController, type: :request do
 
     context 'admin is signed in' do
       include Docs::TimeTables::ShowAdmin
-      before do
-        sign_in admin
-      end
+      before { sign_in admin }
 
       context 'the time table exists' do
-        before do
-          get "/time_tables/#{time_table.id}", as: :json
-        end
+        before { get "/time_tables/#{time_table.id}", as: :json }
 
         it 'returns status 200' do
           is_successfull
@@ -137,9 +128,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the time table does not exist' do
-        before do
-          get "/time_tables/0", as: :json
-        end
+        before { get "/time_tables/0", as: :json }
 
         it 'returns status 404' do
           expect(status).to eq(404)
@@ -155,9 +144,7 @@ RSpec.describe TimeTablesController, type: :request do
   describe 'GET /time_tables/by_user/:user_id' do
     include Docs::TimeTables::ByUser
     context 'user is not signed in' do
-      before do
-        get "/time_tables/by_user/#{test_user.id}", as: :json
-      end
+      before { get "/time_tables/by_user/#{test_user.id}", as: :json }
 
       it 'returns status 401' do
         expect(status).to eq(401)
@@ -169,9 +156,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
 
     context 'user is signed in' do
-      before do
-        sign_in test_user
-      end
+      before { sign_in test_user }
 
       context 'the user requested is valid' do
         before do
@@ -189,9 +174,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the user requested is invalid' do
-        before do
-          get "/time_tables/by_user/#{users.sample.id}", as: :json
-        end
+        before { get "/time_tables/by_user/#{users.sample.id}", as: :json }
 
         it 'returns status 403' do
           expect(status).to eq(403)
@@ -204,9 +187,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
 
     context 'admin is signed in' do
-      before do
-        sign_in admin
-      end
+      before { sign_in admin }
 
       context 'the user exists' do
         before do
@@ -224,9 +205,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the user has no time tables' do
-        before do
-          get "/time_tables/by_user/#{users.sample.id}", as: :json
-        end
+        before { get "/time_tables/by_user/#{users.sample.id}", as: :json }
 
         it 'returns status 200' do
           is_successfull
@@ -238,9 +217,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'the user does not exist' do
-        before do
-          get "/time_tables/by_user/0", as: :json
-        end
+        before { get "/time_tables/by_user/0", as: :json }
 
         it 'returns status 404' do
           expect(status).to eq(404)
@@ -269,9 +246,7 @@ RSpec.describe TimeTablesController, type: :request do
     end
 
     context 'user is signed in' do
-      before do
-        sign_in test_user
-      end
+      before { sign_in test_user }
 
       context 'the user has an open time table' do
         include Docs::TimeTables::Checkout
@@ -300,9 +275,7 @@ RSpec.describe TimeTablesController, type: :request do
 
       context 'the user does not have an open time table' do
         include Docs::TimeTables::Checkin
-        before do
-          post '/time_tables', as: :json
-        end
+        before { post '/time_tables', as: :json }
 
         it 'returns status 200' do
           is_successfull
@@ -319,9 +292,7 @@ RSpec.describe TimeTablesController, type: :request do
   
   describe 'PUT/PATCH /time_tables/:id' do
     context 'user is not signed in' do
-      before do
-        put "/time_tables/#{user_time_table.id}", params: { checkin: DateTime.now }, as: :json
-      end
+      before { put "/time_tables/#{user_time_table.id}", params: { checkin: DateTime.now }, as: :json }
 
       it 'returns status 401' do
         expect(status).to eq(401)
@@ -357,15 +328,14 @@ RSpec.describe TimeTablesController, type: :request do
       context 'time table exists' do
         context 'checkin and checkout are updated' do
           include Docs::TimeTables::Update
-          before do
-            put "/time_tables/#{user_time_table.id}", params: { checkin: @checkin, checkout: @checkout }, as: :json
-          end
+          before { put "/time_tables/#{user_time_table.id}", params: { checkin: @checkin, checkout: @checkout }, as: :json }
 
           it 'returns status 200' do
             is_successfull
           end
 
-          it 'updates check times', :dox do
+          it 'updates check tim
+        endes', :dox do
             expect(DateTime.parse(json['checkin']).to_i).to eq(@checkin.to_i)
             expect(DateTime.parse(json['checkout']).to_i).to eq(@checkout.to_i)
           end
@@ -377,9 +347,7 @@ RSpec.describe TimeTablesController, type: :request do
 
         context 'checkin is updated' do
           context ''
-          before do
-            put "/time_tables/#{user_time_table.id}", params: { checkin: @checkin, checkout: nil }, as: :json
-          end
+          before { put "/time_tables/#{user_time_table.id}", params: { checkin: @checkin, checkout: nil }, as: :json }
 
           it 'returns status 200' do
             is_successfull
@@ -396,10 +364,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'time table does not exist' do
-        before do
-          put "/time_tables/0", params: { checkin: @checkin, checkout: @checkout }, as: :json
-        end
-
+        before { put "/time_tables/0", params: { checkin: @checkin, checkout: @checkout }, as: :json }
         it 'returns status 404' do
           expect(status).to eq(404)
         end
@@ -414,9 +379,7 @@ RSpec.describe TimeTablesController, type: :request do
   describe 'DELETE #destroy' do
     include Docs::TimeTables::Delete
     context 'user is not signed in' do
-      before do
-        delete "/time_tables/#{user_time_table.id}", as: :json
-      end
+      before { delete "/time_tables/#{user_time_table.id}", as: :json }
 
       it 'returns status 401' do
         expect(status).to eq(401)
@@ -443,14 +406,10 @@ RSpec.describe TimeTablesController, type: :request do
     end
 
     context 'admin is signed in' do
-      before do
-        sign_in admin
-      end
+      before { sign_in admin }
 
       context 'time table exists' do
-        before do
-          delete "/time_tables/#{user_time_table.id}", as: :json
-        end
+        before { delete "/time_tables/#{user_time_table.id}", as: :json }
 
         it 'returns status 200' do
           is_successfull
@@ -462,9 +421,7 @@ RSpec.describe TimeTablesController, type: :request do
       end
 
       context 'time table does not exist' do
-        before do
-          delete "/time_tables/0", as: :json
-        end
+        before { delete "/time_tables/0", as: :json }
 
         it 'returns status 404' do
           expect(status).to eq(404)

@@ -8,6 +8,5 @@ class ApplicationController < ActionController::Base
   
   def deny_access
     json_response({ 'Access denied': 'You don\'t have access to this resource' }, 403)
-    
   end
 end

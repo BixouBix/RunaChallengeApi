@@ -59,7 +59,7 @@ class TimeTablesController < ApplicationController
   # DELETE /time_tables/:id
   def destroy
     if @time_table.destroy
-      render json: { 'message': 'Time table was deleted successfully' }
+      json_response({ 'message': 'Time table was deleted successfully' }, 200)
     else
       head 422
     end
