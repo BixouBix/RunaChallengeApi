@@ -13,7 +13,7 @@ git@github.com:BixouBix/RunaChallengeApi.git
 ```
 * Change to directory
 ```
-$ cd runa-challenge-api
+$ cd RunaChallengeApi
 ```
 * Install dependencies
 ```
